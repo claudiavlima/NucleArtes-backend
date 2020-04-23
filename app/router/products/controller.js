@@ -22,7 +22,7 @@ const insertProduct = (req, res) => {
     console.log(req.body)
     const product = new Product ({
         _id: req.body._id,
-        tittle: req.body.tittle,
+        title: req.body.title,
         description: req.body.description,
         price: req.body.price,
         stock: req.body.stock,
