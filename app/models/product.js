@@ -27,7 +27,7 @@ const ProductSchema = new Schema (
             type: String,
             required: true
         },
-        id_proveedor: {
+        id_artesano: {
             type: mongoose.Schema.Types.ObjectId,
             ref:'users',
             required: true
