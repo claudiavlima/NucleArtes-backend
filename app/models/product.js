@@ -26,6 +26,15 @@ const ProductSchema = new Schema (
         img: {
             type: String,
             required: true
+        },
+        id_proveedor: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'users',
+            required: true
+        },
+        category_name: {
+            type: String,
+            required: true
         }
     },
     { versionKey: false }
