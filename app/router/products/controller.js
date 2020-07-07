@@ -27,7 +27,7 @@ const insertProduct = (req, res) => {
         price: req.body.price,
         stock: req.body.stock,
         img: req.body.img,
-        id_artesano: req.body.userId,
+        id_artesano: req.body.id_artesano,
         category_name: req.body.category_name
     })
     product.save(err => {
