@@ -16,7 +16,8 @@ const insertUser = (req, res) => {
         name: req.body.name,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: sha256(req.body.password)
+        password: sha256(req.body.password),
+        role: req.body.role,
     })
     user.save(err => {
         if (err) res.send({ msg: 'Cant`t save the user', error: err })
@@ -54,7 +55,8 @@ const signUp = (req, res) => {
       name: req.body.name,
       lastname: req.body.lastname,
       email: req.body.email,
-      password: sha256(req.body.password)
+      password: sha256(req.body.password),
+      role: req.body.role
     })
     user.save(err => {
       if (err) res.status(500).send({ msg: `Can't save the user: ${err}` })
