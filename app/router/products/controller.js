@@ -2,17 +2,17 @@ const Product = require('../../models/product')
 
 //Get all product method
 const getAll = (req, res) => {
-    Product.find({},(err, products) => {
-        if (err) res.send({ msg:'can`t get the product list', error: err})
+    Product.find({}, (err, products) => {
+        if (err) res.send({ msg: 'can`t get the product list', error: err })
         res.send(products)
     })
 }
 
 // Get proveedor id product method
-const getByIdArtesano = (req, res) => {
-    Product.find( {id_artesano:req.params.id} , (err, products) => {
+const getProductByArtesanoId = (req, res) => {
+    Product.find({ artesanoId: req.params.id }, (err, products) => {
         if (err)
-        res.send({ msg: `Cant't get the product ${req.params.id}`, error: err })
+            res.send({ msg: `Cant't get the product ${req.params.id}`, error: err })
         res.send(products)
     })
 }
@@ -20,15 +20,15 @@ const getByIdArtesano = (req, res) => {
 // Insert product method
 const insertProduct = (req, res) => {
     console.log(req.body)
-    const product = new Product ({
+    const product = new Product({
         _id: req.body._id,
         title: req.body.title,
         description: req.body.description,
         price: req.body.price,
         stock: req.body.stock,
         img: req.body.img,
-        id_artesano: req.body.id_artesano,
-        category_name: req.body.category_name
+        artesanoId: req.body.artesanoId,
+        categoryName: req.body.categoryName
     })
     product.save(err => {
         if (err) res.send({ msg: 'Cant`t save the product', error: err })
@@ -38,19 +38,19 @@ const insertProduct = (req, res) => {
 
 // Upsert product method 
 const upsertProduct = (req, res) => {
-    Product.updateOne({ _id: req.params.id  }, { ...req.body }, err => {
+    Product.updateOne({ _id: req.params.id }, { ...req.body }, err => {
         if (err)
-        res.send({
-          msg: `Cant't upsert the product ${req.params.id}`,
-          error: err
-        })
+            res.send({
+                msg: `Cant't upsert the product ${req.params.id}`,
+                error: err
+            })
         res.send({ msg: 'Product upserted' })
     })
 }
 
 // Remove product method
 const removeProduct = (req, res) => {
-    Product.findOneAndDelete({ _id: req.params.id } ,(err, doc) => {
+    Product.findOneAndDelete({ _id: req.params.id }, (err, doc) => {
         if (err) return res.status(500).send(err)
         res.status(200).send(doc)
     })
@@ -58,7 +58,7 @@ const removeProduct = (req, res) => {
 
 module.exports = {
     getAll,
-    getByIdArtesano,
+    getProductByArtesanoId,
     insertProduct,
     upsertProduct,
     removeProduct
