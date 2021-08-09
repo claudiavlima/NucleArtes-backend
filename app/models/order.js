@@ -27,7 +27,7 @@ const OrderSchema = new Schema(
     status: {
       type: String,
       required: true,
-      default: 'PENDIENTE',
+      default: 'PAGADO',
     }
   },
   { versionKey: false }
