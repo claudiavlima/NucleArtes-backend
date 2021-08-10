@@ -25,6 +25,7 @@
     "mercadopago": "^1.5.5",
     "moment": "^2.24.0",
     "mongoose": "^5.9.10",
+    "nodemailer": "^6.6.3",
     "nodemon": "^2.0.12",
     "sha256": "^0.2.0"
   }
