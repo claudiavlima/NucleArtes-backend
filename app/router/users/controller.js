@@ -97,7 +97,7 @@ const forgotPassword = async (req, res) => {
     from: '"Soporte de Artesanos Unidos" <artesanosunidos@soporte.com>', // sender address
     to: `${client.email}`, // list of receivers
     subject: "Recuperacion de contraseña", // Subject line
-    html: "<b>Su nueva contraseña es: 'Client1'. Atte: Soporte de Artesanos Unidos</b>", // html body
+    html: "<b>Se ha actualizado la contraseña, la misma es 'Client1'. Saludos coordiales, NucleArtes</b>", // html body
   });
 
   if (!info) {
