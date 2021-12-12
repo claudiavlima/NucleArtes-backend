@@ -97,20 +97,35 @@ const forgotPassword = async (req, res) => {
     from: '"Soporte de Artesanos Unidos" <artesanosunidos@soporte.com>', // sender address
     to: `${client.email}`, // list of receivers
     subject: "Recuperacion de contraseña", // Subject line
-    html: "<b>Se ha actualizado la contraseña, la misma es 'Client1'. Saludos coordiales, NucleArtes</b>", // html body
+    html: `<p>Para reestablecer su contraseña ingrese al siguiente: <a href="http://localhost:3000/recover-password/${client._id}">link</a></p>`
   });
 
   if (!info) {
     res.send({ msg: 'No se pudo enviar el mail' })
   }
 
-  const response = await User.findByIdAndUpdate(
-    { _id: client._id },
-    { password: sha256('Client1') },
+  res.send({ msg: "Se envio un mail a su casilla de correo", data: client })
+};
+
+const changePassword = async (req, res) => {
+  const { password, confirmPassword, id } = req.body;
+  const client = await User.findOne({ _id: id });
+  console.log('CLIENT', client);
+  if (!client) {
+    res.send({ msg: 'Client not found' });
+  }
+
+  if (password !== confirmPassword) {
+    res.send({ msg: 'Las contraseñas no son iguales' });
+  }
+
+  const response = await User.findOneAndUpdate(
+    { _id: id },
+    { password: sha256(password) },
     { new: true }
   );
 
-  res.send({ msg: "Se envio un mail a su casilla de correo", data: response })
+  res.send({ msg: "Se cambio ha cambiado su contraseña", data: response })
 };
 
 module.exports = {
@@ -120,4 +135,5 @@ module.exports = {
   signUp,
   removeUser,
   forgotPassword,
+  changePassword,
 }
